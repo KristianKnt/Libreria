@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Lista de libros {% endblock %}
+
+{% block contenido %}
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'crear'%}" role="button">Agregar nuevo Libro</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Libros</h4>
+        
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for libro in libros %}
+                    <!-- colocamos una variable 'libro' que recorra el ciclo hasta Libros 
+                    donde libros tendra una sentencia ORM libros = Libro.objects.all() asi reccorre todo el
+                    contenido que hay en la base de datos en la tabla Libros -->
+                    <tr class="">
+                        <td>{{libro.id}}</td>
+                        <td>{{libro.titulo}}</td>
+                        <td>
+                            <img src="{{libro.imagen.url}}" height="50" />
+                            
+                        
+                        </td>
+                        <td>{{libro.descripcion}}</td>
+                        <td> <a name="" id="" class="btn btn-info" href="{% url 'editar' libro.id  %}" role="button">Editar</a>
+                             | 
+                             <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' libro.id %}" role="button">Borrar</a>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+
+    </div>
+    <div class="card-footer text-muted">
+    
+    </div>
+</div>
+
+{% endblock %}
